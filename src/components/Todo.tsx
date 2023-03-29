@@ -1,11 +1,7 @@
-import type { Todo } from "~/types";
+import { Todo } from "@prisma/client";
 import { api } from "../utils/api";
 
-type TodoProps = {
-  todo: Todo;
-};
-
-export default function Todo({ todo }: TodoProps) {
+export default function TodoComponent({ todo }: { todo: Todo }) {
   const { id, text, done } = todo;
 
   //Mutations utilizadas para mudar a propriedade "done" e apagar o todo

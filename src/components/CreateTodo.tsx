@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { api } from "~/utils/api";
-import { todoInput } from "~/types";
 
 export default function CreateTodo() {
   const [newTodo, setNewTodo] = useState("");
@@ -19,13 +18,6 @@ export default function CreateTodo() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-
-            const result = todoInput.safeParse(newTodo);
-
-            if (!result.success) {
-              console.log("Erro");
-              return;
-            }
             //Create a Todo
             mutate(newTodo);
           }}

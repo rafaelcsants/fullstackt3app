@@ -1,12 +1,9 @@
 import { z } from "zod";
-import { todoInput } from "~/types";
-
 import {
   createTRPCRouter,
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
-import { Input } from "postcss";
 
 export const todoRouter = createTRPCRouter({
   //  GetAll ToDos
@@ -21,7 +18,14 @@ export const todoRouter = createTRPCRouter({
 
   //  Criar um ToDo
   create: protectedProcedure
-    .input(todoInput)
+    .input(
+      z
+        .string({
+          required_error: "Describe your todo",
+        })
+        .min(1)
+        .max(50)
+    )
     .mutation(async ({ ctx, input }) => {
       return ctx.prisma.todo.create({
         data: {
