@@ -13,7 +13,14 @@ export const todoRouter = createTRPCRouter({
         userId: ctx.session.user.id,
       },
     });
-    return todos.map(({ id, text, done }) => ({ id, text, done }));
+    return todos.map(({ id, text, done, createdAt, updatedAt, userId }) => ({
+      id,
+      text,
+      done,
+      createdAt,
+      updatedAt,
+      userId,
+    }));
   }),
 
   //  Criar um ToDo
